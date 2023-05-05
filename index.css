@@ -120,9 +120,17 @@ body {
   grid-column: 2 / -2;
   grid-row: 1;
   display: grid;
-  grid-template-columns: var(--current-stop-width) repeat(18,1fr);
+  --left-col-count: 0;
+  --right-col-count: 18;
+  grid-template-columns: repeat(var(--left-col-count),1fr) var(--current-stop-width) repeat(var(--right-col-count),1fr);
   transition: var(--global-transition);
   position: relative;
+}
+#metro-nav.right-only {
+  grid-template-columns: var(--current-stop-width) repeat(var(--right-col-count),1fr);
+}
+#metro-nav.left-only {
+  grid-template-columns:  repeat(var(--left-col-count),1fr) var(--current-stop-width);
 }
 #metro-nav * {
   transition: inherit;
@@ -546,4 +554,110 @@ input.contract-element-input:focus, select.contract-element-input:focus {
 #conversion-options > li:not(.disabled):hover {
   background-color: var(--double-accent);
   cursor: pointer;
+}
+#error-cont {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  pointer-events: none;
+  display: none;
+  justify-content: center;
+}
+#error-cont.visible {
+  display: flex;
+}
+#error-cont > span {
+  background-color: var(--double-accent);
+  pointer-events: all;
+  max-width: 50%;
+  padding: 5px;
+  text-align: center;
+  color: var(--counter);
+  font-size: 1.5em;
+  line-height: 1.4em;
+  box-shadow: 0.5px 0.5px 1.5px var(--nfl-red);
+}
+/* adaptive */
+@media screen and (max-width: 1200px) {
+  #contract-cont, #elements-cont {
+    font-size: 16px;
+  }
+  .contract-element-name {
+    font-size: 20px;
+  }
+}
+@media only screen and (orientation: portrait) {
+  body {
+    grid-template-columns: 40px 1fr 1fr 40px;
+    grid-template-rows: 40px 120px 160px auto 40px;
+  }
+  #metro-nav {
+    grid-row: 1;
+    grid-column: 2 / span 3;
+    grid-template-columns: 1fr !important;
+  }
+  #summary-cont {
+    grid-row: 2;
+    grid-column: 1 / span 4;
+  }
+  #elements-cont {
+    grid-row: 3;
+    grid-column: 1 / span 4;
+    grid-template-rows: 20px 2px 1fr;
+  }
+  #contract-cont {
+    grid-row: 4;
+    grid-column: 1 / span 4;
+    grid-template-rows: 20px 2px auto 50px 50px;
+    grid-template-columns: auto 120px 120px 100px auto;
+    overflow-x: auto;
+  }
+  .side-nav {
+    grid-row: 5;
+    height: 40px;
+    width: auto;
+    margin: 0;
+  }
+  .side-nav.left {
+    grid-column: 1 / span 2;
+  }
+  .side-nav.right {
+    grid-column: 3 / span 2;
+  }
+
+  #element-list {
+    overflow: auto;
+  }
+  .contract-header {
+    line-height: 20px;
+  }
+  .side-nav:not(.disabled) > svg {
+    left: auto;
+    top: -7px;
+  }
+  .side-nav.disabled > svg {
+    height: 30px;
+  }
+  .summary-page.white > h1 {
+    font-size: 20px;
+  }
+  .summary-page > p {
+    font-size: 1em;
+    line-height: 1.1em;
+  }
+  #metro-nav > .metro-stop:not(.large) {
+    display: none;
+  }
+  .contract-element.release-or-trade.in-contract {
+    grid-template-columns: 30px 180px repeat(7,60px) 30px;
+  }
+  .tally {
+    grid-template-columns: 211.5px repeat(7,60px) 35px;
+  }
+  .tally > .contract-header {
+    line-height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
