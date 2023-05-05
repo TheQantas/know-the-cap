@@ -13,7 +13,7 @@ type UnlockedPage = {locked:true,reason:string,fxn?: () => void,shake?: ElementT
 class PageLock {
   private readonly pageIndex: number;
   private advanceAllowed: boolean;
-  private readonly reason?: string;
+  public readonly reason?: string;
   private readonly fxn?: () => void
   private readonly shake?: ElementType;
 
@@ -94,6 +94,9 @@ function changePage(dxn: 1 | -1): void {
   //   return;
   // }
   if (dxn == 1 && !pageLockList[currentPage].canAdvance()) {
+    if (pageLockList[currentPage].reason) {
+      showError(pageLockList[currentPage].reason as string);
+    }
     return;
   }
   const metroStopDOMs: HTMLCollection = document.getElementsByClassName('metro-stop');
@@ -103,14 +106,20 @@ function changePage(dxn: 1 | -1): void {
   summaryDOMs[currentPage].classList.remove('expanded');
   summaryDOMs[nextPage].classList.add('expanded');
   const metroCont = document.getElementById('metro-nav') as HTMLDivElement;
+  metroCont.style.setProperty('--left-col-count',String(nextPage));
+  metroCont.style.setProperty('--right-col-count',String(pageCount-nextPage-1));
   if (nextPage == 0) {
-    metroCont.style.gridTemplateColumns = `var(--current-stop-width) repeat(${pageCount-1},1fr)`;
+    // metroCont.style.gridTemplateColumns = `var(--current-stop-width) repeat(${pageCount-1},1fr)`;
+    metroCont.classList.add('right-only');
     navBtnDOMs[0].classList.add('disabled');
   } else if (nextPage == pageCount - 1) {
-    metroCont.style.gridTemplateColumns = `repeat(${pageCount-1},1fr) var(--current-stop-width)`;
+    // metroCont.style.gridTemplateColumns = `repeat(${pageCount-1},1fr) var(--current-stop-width)`;
+    metroCont.classList.add('left-only');
     navBtnDOMs[1].classList.add('disabled');
   } else {
-    metroCont.style.gridTemplateColumns = `repeat(${nextPage},1fr) var(--current-stop-width) repeat(${pageCount-nextPage-1},1fr)`;
+    // metroCont.style.gridTemplateColumns = `repeat(${nextPage},1fr) var(--current-stop-width) repeat(${pageCount-nextPage-1},1fr)`;
+    metroCont.classList.remove('left-only');
+    metroCont.classList.remove('right-only');
     navBtnDOMs[0].classList.remove('disabled');
     navBtnDOMs[1].classList.remove('disabled');
   }
@@ -147,6 +156,7 @@ function changePage(dxn: 1 | -1): void {
 function unlockElement(type: ElementType): void {
   const dom = document.querySelector(`#element-list > .${type}`) as HTMLDivElement;
   dom.classList.remove('locked');
+  dom.setAttribute('aria-label',(dom.getAttribute('aria-label') as string).replace('Locked ',''));
   dom.title = '';
 }
 
@@ -207,7 +217,7 @@ abstract class ContractElement {
       pageLockList[10].allowAdvance();
     } else if (this.type == 'release-or-trade') {
       // unlockPage(16);
-      pageLockList[15].allowAdvance();
+      pageLockList[16].allowAdvance();
     }
     this.addConversionListener();
   }
@@ -264,6 +274,14 @@ abstract class ContractElement {
       input.ondblclick = (ev: MouseEvent) => {
         this.showConversionOptions(ev.clientX,ev.clientY,input);
       }
+      input.onkeydown = (ev: KeyboardEvent) => {
+        if (ev.key == 'c' || ev.key == 'C') {
+          const rect: DOMRect = input.getBoundingClientRect();
+          this.showConversionOptions(rect.left,rect.top + rect.height,input);
+          ev.preventDefault();
+          (document.getElementById('conversion-options')?.children[0] as HTMLElement).focus();
+        }
+      }
     }
   }
   private showConversionOptions(x: number,y: number,input: HTMLInputElement): void {
@@ -309,7 +327,7 @@ abstract class ContractElement {
     if (this.type != 'base-salary') {
       return;
     }
-    const value = Number(listDOM.getAttribute('value'));
+    const value = Number(listDOM.getAttribute('data-value'));
     if (isNaN(value) || value > this.dollarAmounts[index]) {
       return;
     }
@@ -584,10 +602,8 @@ class Incentive extends ContractElement {
   public getCapHits(releaseYear?: number): number[] {
     const zeroArray: number[] = new Array(7).fill(0);
     if (releaseYear != undefined && releaseYear - 1 >= this.year) {
-      console.log('ret');
       return zeroArray;
     }
-    console.log(this.value);
     if (this.status == 'likely' && this.achievement == 'achieved') {
       zeroArray[this.year - 1] = this.value;
     } else if (this.status == 'likely' && this.achievement == 'not_achieved') {
@@ -726,6 +742,28 @@ function toggleTranslateBar(): void { //from html
 }
 
 let formerValue: string = 'Contract Elements';
+let errorTimeout: number = 0;
+
+function getParentContractDOM(dom: HTMLElement): HTMLElement | null {
+  let iterDOM = dom;
+  while (iterDOM?.parentElement) {
+    if (iterDOM.classList.contains('contract-element')) {
+      return iterDOM;
+    }
+    iterDOM = iterDOM.parentElement;
+  }
+  return null;
+}
+
+function showError(errMsg: string): void {
+  clearTimeout(errorTimeout);
+  const errorDOM = document.getElementById('error-cont') as HTMLElement;
+  errorDOM.classList.add('visible');
+  errorDOM.children[0].textContent = errMsg;
+  errorTimeout = window.setTimeout(() => {
+    errorDOM.classList.remove('visible');
+  },errMsg.length * 70 + 100);
+}
 
 window.onload = (): void => {
   (document.getElementById('first-name-input') as HTMLInputElement).oninput = () => {
@@ -768,20 +806,29 @@ window.onload = (): void => {
 }
 
 window.onkeydown = (ev: KeyboardEvent): void => {
-  if (document.activeElement?.classList.contains('contract-element-input') && (ev.key == 'D' || ev.key == 'd')) {
-    let iterDOM = ev.target as HTMLElement | null;
-    let contractDOM: HTMLElement | null = null;
-    while (iterDOM?.parentElement) {
-      if (iterDOM.classList.contains('contract-element')) {
-        contractDOM = iterDOM;
-        break;
-      }
-      iterDOM = iterDOM.parentElement;
-    }
+  const contractDOM: HTMLElement | null = getParentContractDOM(ev.target as HTMLElement);
+  const isInputDOM = document.activeElement?.classList.contains('contract-element-input') as boolean;
+  if (isInputDOM && (ev.key == 'D' || ev.key == 'd')) {
     if (contractDOM && contractDOM.id != 'element-0') {
       contractDOM.remove();
       ev.preventDefault();
       return;
+    }
+  } else if (isInputDOM && ev.key == 'Escape') {
+    (document.activeElement as HTMLElement | undefined)?.blur();
+  } else if (isInputDOM && ev.key == 'ArrowUp' && ev.altKey) {
+    if (contractDOM?.previousElementSibling) {
+      (contractDOM.previousElementSibling.querySelector('input') as HTMLElement).focus();
+      ev.preventDefault();
+    } else {
+      showError('This is the first element in the contract');
+    }
+  } else if (isInputDOM && ev.key == 'ArrowDown' && ev.altKey) {
+    if (contractDOM?.nextElementSibling) {
+      (contractDOM.nextElementSibling.querySelector('input') as HTMLElement).focus();
+      ev.preventDefault();
+    } else {
+      showError('This is the last element in the contract');
     }
   }
   if (document.activeElement?.tagName == 'INPUT') {
@@ -808,9 +855,15 @@ window.onkeydown = (ev: KeyboardEvent): void => {
   } else if (ev.key == 'T' || ev.key == 't') {
     addElementToContract('release-or-trade');
     ev.preventDefault();
-  } else if (ev.key == 'ArrowRight') {
+  } else if (ev.key == 'ArrowRight' || ev.key == 'N' || ev.key == 'n') {
     changePage(1);
-  } else if (ev.key == 'ArrowLeft') {
+  } else if (ev.key == 'ArrowLeft' || ev.key == 'P' || ev.key == 'p') {
     changePage(-1);
+  } else if (ev.key == 'e' || ev.key == 'E') {
+    const firstContractDOM = document.querySelector('#contract-list > .contract-element');
+    if (firstContractDOM) {
+      (firstContractDOM.querySelector('input') as HTMLElement).focus();
+      ev.preventDefault();
+    }
   }
 }
