@@ -73,6 +73,9 @@ function changePage(dxn) {
     }
     const navBtnDOMs = document.getElementsByClassName('side-nav');
     if (dxn == 1 && !pageLockList[currentPage].canAdvance()) {
+        if (pageLockList[currentPage].reason) {
+            showError(pageLockList[currentPage].reason);
+        }
         return;
     }
     const metroStopDOMs = document.getElementsByClassName('metro-stop');
@@ -82,16 +85,19 @@ function changePage(dxn) {
     summaryDOMs[currentPage].classList.remove('expanded');
     summaryDOMs[nextPage].classList.add('expanded');
     const metroCont = document.getElementById('metro-nav');
+    metroCont.style.setProperty('--left-col-count', String(nextPage));
+    metroCont.style.setProperty('--right-col-count', String(pageCount - nextPage - 1));
     if (nextPage == 0) {
-        metroCont.style.gridTemplateColumns = `var(--current-stop-width) repeat(${pageCount - 1},1fr)`;
+        metroCont.classList.add('right-only');
         navBtnDOMs[0].classList.add('disabled');
     }
     else if (nextPage == pageCount - 1) {
-        metroCont.style.gridTemplateColumns = `repeat(${pageCount - 1},1fr) var(--current-stop-width)`;
+        metroCont.classList.add('left-only');
         navBtnDOMs[1].classList.add('disabled');
     }
     else {
-        metroCont.style.gridTemplateColumns = `repeat(${nextPage},1fr) var(--current-stop-width) repeat(${pageCount - nextPage - 1},1fr)`;
+        metroCont.classList.remove('left-only');
+        metroCont.classList.remove('right-only');
         navBtnDOMs[0].classList.remove('disabled');
         navBtnDOMs[1].classList.remove('disabled');
     }
@@ -128,6 +134,7 @@ function changePage(dxn) {
 function unlockElement(type) {
     const dom = document.querySelector(`#element-list > .${type}`);
     dom.classList.remove('locked');
+    dom.setAttribute('aria-label', dom.getAttribute('aria-label').replace('Locked ', ''));
     dom.title = '';
 }
 class ContractElement {
@@ -170,7 +177,7 @@ class ContractElement {
             pageLockList[10].allowAdvance();
         }
         else if (this.type == 'release-or-trade') {
-            pageLockList[15].allowAdvance();
+            pageLockList[16].allowAdvance();
         }
         this.addConversionListener();
     }
@@ -188,8 +195,9 @@ class ContractElement {
         ContractElement.updateAllElements();
     }
     updateOutput() {
+        var _a, _b;
         const outputDOMs = this.dom.querySelectorAll('div.contract-element-output');
-        const dollarDistr = this.getCapHits(ContractElement.releaseElement?.getReleaseYear(), ContractElement.releaseElement?.getJune1st());
+        const dollarDistr = this.getCapHits((_a = ContractElement.releaseElement) === null || _a === void 0 ? void 0 : _a.getReleaseYear(), (_b = ContractElement.releaseElement) === null || _b === void 0 ? void 0 : _b.getJune1st());
         for (let i = 0; i < outputDOMs.length && i < dollarDistr.length; i++) {
             if (dollarDistr[i] < 0) {
                 outputDOMs[i].textContent = '+' + String(Number((-dollarDistr[i]).toFixed(3)));
@@ -200,8 +208,9 @@ class ContractElement {
         }
     }
     remove() {
+        var _a;
         this.dom.remove();
-        if (ContractElement.releaseElement?.id == this.id) {
+        if (((_a = ContractElement.releaseElement) === null || _a === void 0 ? void 0 : _a.id) == this.id) {
             ContractElement.releaseElement = null;
         }
         const lockedCloneParent = document.querySelector(`.contract-element.${this.type}.locked`);
@@ -220,6 +229,15 @@ class ContractElement {
         for (const input of inputDOMs) {
             input.ondblclick = (ev) => {
                 this.showConversionOptions(ev.clientX, ev.clientY, input);
+            };
+            input.onkeydown = (ev) => {
+                var _a;
+                if (ev.key == 'c' || ev.key == 'C') {
+                    const rect = input.getBoundingClientRect();
+                    this.showConversionOptions(rect.left, rect.top + rect.height, input);
+                    ev.preventDefault();
+                    ((_a = document.getElementById('conversion-options')) === null || _a === void 0 ? void 0 : _a.children[0]).focus();
+                }
             };
         }
     }
@@ -268,7 +286,7 @@ class ContractElement {
         if (this.type != 'base-salary') {
             return;
         }
-        const value = Number(listDOM.getAttribute('value'));
+        const value = Number(listDOM.getAttribute('data-value'));
         if (isNaN(value) || value > this.dollarAmounts[index]) {
             return;
         }
@@ -286,6 +304,7 @@ class ContractElement {
         document.getElementById('contract-list').insertBefore(clonedSigningDOM, this.dom.nextSibling);
     }
     static updateAllElements() {
+        var _a, _b, _c, _d;
         const capHits = new Array(7).fill(0);
         const payments = new Array(7).fill(0);
         for (const element of ContractElement.elemMap.values()) {
@@ -293,8 +312,8 @@ class ContractElement {
                 continue;
             }
             element.updateOutput();
-            const elementCapHits = element.getCapHits(ContractElement.releaseElement?.getReleaseYear(), ContractElement.releaseElement?.getJune1st());
-            const elementPayments = element.getPayments(ContractElement.releaseElement?.getReleaseYear(), ContractElement.releaseElement?.getJune1st());
+            const elementCapHits = element.getCapHits((_a = ContractElement.releaseElement) === null || _a === void 0 ? void 0 : _a.getReleaseYear(), (_b = ContractElement.releaseElement) === null || _b === void 0 ? void 0 : _b.getJune1st());
+            const elementPayments = element.getPayments((_c = ContractElement.releaseElement) === null || _c === void 0 ? void 0 : _c.getReleaseYear(), (_d = ContractElement.releaseElement) === null || _d === void 0 ? void 0 : _d.getJune1st());
             for (let i = 0; i < 7; i++) {
                 capHits[i] += elementCapHits[i];
                 payments[i] += elementPayments[i];
@@ -536,10 +555,8 @@ class Incentive extends ContractElement {
     getCapHits(releaseYear) {
         const zeroArray = new Array(7).fill(0);
         if (releaseYear != undefined && releaseYear - 1 >= this.year) {
-            console.log('ret');
             return zeroArray;
         }
-        console.log(this.value);
         if (this.status == 'likely' && this.achievement == 'achieved') {
             zeroArray[this.year - 1] = this.value;
         }
@@ -607,10 +624,10 @@ function drop(ev) {
 }
 function addElementToContract(type) {
     const parent = document.querySelector(`.contract-element.${type}`);
-    if (parent?.classList.contains('locked')) {
+    if (parent === null || parent === void 0 ? void 0 : parent.classList.contains('locked')) {
         return;
     }
-    const clone = parent?.cloneNode(true);
+    const clone = parent === null || parent === void 0 ? void 0 : parent.cloneNode(true);
     clone.classList.remove('locked');
     clone.classList.add('in-contract');
     clone.title = '';
@@ -625,7 +642,7 @@ function addElementToContract(type) {
 function hideConversionOptions(ev) {
     let isDOMChildOfConversionMenu = false;
     let iterDOM = ev.target;
-    while (iterDOM?.parentElement) {
+    while (iterDOM === null || iterDOM === void 0 ? void 0 : iterDOM.parentElement) {
         if (iterDOM.parentElement.id == 'conversion-options') {
             isDOMChildOfConversionMenu = true;
             break;
@@ -644,18 +661,39 @@ function googleTranslateElementInit() {
     }, 'google-translate-bar');
 }
 function toggleTranslateBar() {
+    var _a, _b;
     const barDOM = document.getElementById('google-translate-bar');
     barDOM.classList.toggle('hide');
     document.getElementById('google-translate-btn').classList.toggle('expanded');
     const translateFrame = document.querySelector('.skiptranslate > iframe');
-    if (translateFrame?.parentElement?.classList.contains('hide')) {
+    if ((_a = translateFrame === null || translateFrame === void 0 ? void 0 : translateFrame.parentElement) === null || _a === void 0 ? void 0 : _a.classList.contains('hide')) {
         translateFrame.parentElement.classList.remove('hide');
     }
     else {
-        translateFrame?.parentElement?.classList.add('hide');
+        (_b = translateFrame === null || translateFrame === void 0 ? void 0 : translateFrame.parentElement) === null || _b === void 0 ? void 0 : _b.classList.add('hide');
     }
 }
 let formerValue = 'Contract Elements';
+let errorTimeout = 0;
+function getParentContractDOM(dom) {
+    let iterDOM = dom;
+    while (iterDOM === null || iterDOM === void 0 ? void 0 : iterDOM.parentElement) {
+        if (iterDOM.classList.contains('contract-element')) {
+            return iterDOM;
+        }
+        iterDOM = iterDOM.parentElement;
+    }
+    return null;
+}
+function showError(errMsg) {
+    clearTimeout(errorTimeout);
+    const errorDOM = document.getElementById('error-cont');
+    errorDOM.classList.add('visible');
+    errorDOM.children[0].textContent = errMsg;
+    errorTimeout = window.setTimeout(() => {
+        errorDOM.classList.remove('visible');
+    }, errMsg.length * 70 + 100);
+}
 window.onload = () => {
     document.getElementById('first-name-input').oninput = () => {
         const fname = document.getElementById('first-name-input').value;
@@ -695,23 +733,38 @@ window.onload = () => {
     }
 };
 window.onkeydown = (ev) => {
-    if (document.activeElement?.classList.contains('contract-element-input') && (ev.key == 'D' || ev.key == 'd')) {
-        let iterDOM = ev.target;
-        let contractDOM = null;
-        while (iterDOM?.parentElement) {
-            if (iterDOM.classList.contains('contract-element')) {
-                contractDOM = iterDOM;
-                break;
-            }
-            iterDOM = iterDOM.parentElement;
-        }
+    var _a, _b, _c;
+    const contractDOM = getParentContractDOM(ev.target);
+    const isInputDOM = (_a = document.activeElement) === null || _a === void 0 ? void 0 : _a.classList.contains('contract-element-input');
+    if (isInputDOM && (ev.key == 'D' || ev.key == 'd')) {
         if (contractDOM && contractDOM.id != 'element-0') {
             contractDOM.remove();
             ev.preventDefault();
             return;
         }
     }
-    if (document.activeElement?.tagName == 'INPUT') {
+    else if (isInputDOM && ev.key == 'Escape') {
+        (_b = document.activeElement) === null || _b === void 0 ? void 0 : _b.blur();
+    }
+    else if (isInputDOM && ev.key == 'ArrowUp' && ev.altKey) {
+        if (contractDOM === null || contractDOM === void 0 ? void 0 : contractDOM.previousElementSibling) {
+            contractDOM.previousElementSibling.querySelector('input').focus();
+            ev.preventDefault();
+        }
+        else {
+            showError('This is the first element in the contract');
+        }
+    }
+    else if (isInputDOM && ev.key == 'ArrowDown' && ev.altKey) {
+        if (contractDOM === null || contractDOM === void 0 ? void 0 : contractDOM.nextElementSibling) {
+            contractDOM.nextElementSibling.querySelector('input').focus();
+            ev.preventDefault();
+        }
+        else {
+            showError('This is the last element in the contract');
+        }
+    }
+    if (((_c = document.activeElement) === null || _c === void 0 ? void 0 : _c.tagName) == 'INPUT') {
         return;
     }
     if (ev.key == 'b' || ev.key == 'B') {
@@ -742,10 +795,17 @@ window.onkeydown = (ev) => {
         addElementToContract('release-or-trade');
         ev.preventDefault();
     }
-    else if (ev.key == 'ArrowRight') {
+    else if (ev.key == 'ArrowRight' || ev.key == 'N' || ev.key == 'n') {
         changePage(1);
     }
-    else if (ev.key == 'ArrowLeft') {
+    else if (ev.key == 'ArrowLeft' || ev.key == 'P' || ev.key == 'p') {
         changePage(-1);
+    }
+    else if (ev.key == 'e' || ev.key == 'E') {
+        const firstContractDOM = document.querySelector('#contract-list > .contract-element');
+        if (firstContractDOM) {
+            firstContractDOM.querySelector('input').focus();
+            ev.preventDefault();
+        }
     }
 };
