@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Salary Cap</title>
+    <title>Know the Cap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.png">
 
     <link rel="stylesheet" href="index.css">
 
     <script src="index.js"></script>
-
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
   <body>
 
@@ -18,7 +18,7 @@
         <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
       </svg>
     </button>
-    <div id="metro-nav" class="outer-cont" aria-hidden="true">
+    <div id="metro-nav" class="outer-cont right-only" aria-hidden="true">
       <div class="metro-line"></div>
       <div class="metro-stop white medium large">
         <div class="metro-stop-number">1</div>
@@ -103,25 +103,27 @@
       </svg>
     </button>
     <div class="outer-cont" id="summary-cont" style="overflow-y:auto;">
-      <div class="summary-page white expanded">
+      <div class="summary-page white expanded" role="region">
         <h1>1. Intro to the NFL Salary Cap</h1>
         <p>The NFL salary cap is a hard limit on how much money a team can spend on players' salaries
           in a given year. This limit affects who a team can sign (especially during free agency) and when 
           they can sign them. Over 17 steps, you will learn about the NFL cap by signing 
           <span class="first-name">John</span> <span class="last-name">Doe</span> and changing his contract.
           (Feel free to change <span class="first-name">John</span> <span class="last-name">Doe</span>'s
-          name using the input fields below.)
+          name using the input fields below.) You can navigate to the next page with the right arrow or the "N"
+          key, and to the previous page with the left arrow or "P" key. To enter the first element in the contract
+          area, press "E." To navigate between different contract elements, use Alt+Up Arrow and Alt+Down Arrow.
         </p>
       </div>
-      <div class="summary-page white">
+      <div class="summary-page white" role="region">
         <h1>2. About the NFL Salary Cap</h1>
-        <p>Unlike other leagues, like the MLB, the NFL has a &quot;hard&quot; salary cap, meaning that
+        <p>Unlike other leagues like the MLB, the NFL has a &quot;hard&quot; salary cap, meaning that
           no team can exceed the salary cap at any time. Therefore, the NFL does not need a luxury tax.
           This means that clubs must stay in cap compliance, as going over the cap can
           lead to the termination of contracts, loss of draft picks, and/or fines.
         </p>
       </div>
-      <div class="summary-page white">
+      <div class="summary-page white" role="region">
         <h1>3. Why a Salary Cap?</h1>
         <p>The NFL has a salary cap for 2 main reasons. First, it limits how much the clubs' owners
           have to spend on players' salaries. Second, it improves competitive parity by preventing teams
@@ -129,7 +131,7 @@
           the Jacksonville Jaguars).
         </p>
       </div>
-      <div class="summary-page white">
+      <div class="summary-page white" role="region">
         <h1>4. Salary Cap Calculation</h1>
         <p>Per the Collective Bargaining Agreement (CBA) between the NFL and the players' union,
           the salary cap is calculated as a function of NFL revenue. This means that as NFL revenue
@@ -138,7 +140,7 @@
           clubs stay under the cap while spending evermore on player salaries.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>5. Signing Players</h1>
         <p>When a player signs with a club, the player signs a contract agreeing to exclusively provide
           their services to that club. When and how much the player is paid is also determined by the 
@@ -147,7 +149,7 @@
           a club's salary cap in a given year is known as a &quot;cap hit.&quot;
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>6. Paragraph 5 Salary</h1>
         <p>The player's Paragraph 5 salary (named after its position in the standard NFL 
           contract) determines the player's base salary. Add a base salary by dragging the pink &quot;
@@ -158,7 +160,7 @@
           always be the case.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>7. Guaranteed Money</h1>
         <p>Unlike other leagues like the NBA, NFL contracts are not typically fully guaranteed. However, 
           a portion of a player's base salary may be guaranteed. Although there are different types of
@@ -167,7 +169,7 @@
           <span class="last-name">Doe</span>'s contract.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>8. Signing Bonuses</h1>
         <p>Another form of guaranteed money is signing bonuses. As the name suggests, signing bonuses are 
           paid to a player when they sign a contract with a team. Although the signing bonus is paid in full
@@ -177,14 +179,14 @@
           Keep in mind that you may need to scroll to see all contract elements.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>9. Option Bonuses</h1>
         <p>Option bonuses give the team (or less often, a player) the right to add more years onto a 
           contract in exchange for a bonus. Similarly to Signing Bonuses, Option Bonuses are prorated
           over the length of the contract up to 5 years.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>10. Workout &amp; Roster Bonuses</h1>
         <p>Workout bonuses are awarded to players who participate in a certain percentage of a team's
           workouts as stipulated in their contract. Roster bonuses are awarded to players who are on
@@ -192,7 +194,7 @@
           prorated.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>11. Performance Incentives</h1>
         <p>Performance incentives are awarded to players who meet some statistical measure during a season.
           They are categorized as either likely or unlikely based on a player's performance last season. If 
@@ -204,7 +206,7 @@
           cap hit. (A &quot;+&quot; indicated money refunded to a club's cap.)
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>12. Franchise Tags</h1>
         <p>Franchise tags are one-year contracts that allow a club to retain a certain player. These
           tend to be very costly for a team to use. They are either exclusive or non-exclusive. Non-exclusive 
@@ -212,7 +214,7 @@
           offers a deal bigger than the franchise tag.
         </p>
       </div>
-      <div class="summary-page blue">
+      <div class="summary-page blue" role="region">
         <h1>13. NFL Rookie Contracts</h1>
         <p>The NFL draft is held every year in late April or early May. The players taken in the draft also
           count against a club's salary cap. Rookie contracts are four years and the amount is based on 
@@ -220,7 +222,7 @@
           fifth-year team option in their contract.
         </p>
       </div>
-      <div class="summary-page red">
+      <div class="summary-page red" role="region">
         <h1>14. Staying Under the Cap</h1>
         <p>It is common for NFL clubs to come up against the salary cap. If this happens, they may have to
           make moves to stay under the cap, including restructuring contracts, trading players, or
@@ -229,18 +231,20 @@
           into the future.
         </p>
       </div>
-      <div class="summary-page red">
+      <div class="summary-page red" role="region">
         <h1>15. Restructuring</h1>
         <p>Teams often need to lower the cap hit of players while wanting to keep them on the team. To do
           this, clubs change a player's compensation such that it counts against the cap in future years 
           when the cap will be higher. A common way to do this is to convert a portion of a player's base 
           salary into a signing bonus. You can do this by double-clicking on a part of
           <span class="first-name">John</span> <span class="last-name">Doe</span>'s base salary and selecting
-          how much you want to convert to a signing bonus. To see the effect best, pick one of the earlier
+          how much you want to convert to a signing bonus. You can also press the "C" key in any part of
+          <span class="first-name">John</span> <span class="last-name">Doe</span>'s base salary.
+          To see the effect best, pick one of the earlier
           years. Note how the player's compensation does not change whereas the player's cap hits do.
         </p>
       </div>
-      <div class="summary-page red">
+      <div class="summary-page red" role="region">
         <h1>16. Releasing/Trading a Player</h1>
         <p>If a team cannot afford to keep a player, they may release or trade them.
           In cap calculations, releasing and trading a player is the same thing. If this happens, a player
@@ -251,7 +255,7 @@
           dead cap.&quot;
         </p>
       </div>
-      <div class="summary-page red">
+      <div class="summary-page red" role="region">
         <h1>17. Pre- & Post-June 1st</h1>
         <p>June 1st is an important date for releasing players. If a player is released on or before June 
           1st, all their future cap hits accelerate onto the current year. If a player is released after
@@ -260,11 +264,11 @@
           <span class="last-name">Doe</span> by dragging the &quot;Release or Trade&quot; element into their contract.
         </p>
       </div>
-      <div class="summary-page white">
+      <div class="summary-page white" role="region">
         <h1>18. Conclusion</h1>
         <p>Here is a conclusion.</p>
       </div>
-      <div class="summary-page white">
+      <div class="summary-page white" role="region">
         <h1>19. References</h1>
         <p>Here are references.</p>
       </div>
@@ -276,11 +280,11 @@
       <div class="contract-header">'s Contract</div>
       <div class="spacer"></div>
       <div class="contract-divider"></div>
-      <div id="contract-list" class="inner-cont" ondragover="dragOver(event)" ondrop="drop(event)">
-        <div class="no-items">There are no elements in this contract</div>
+      <div id="contract-list" class="inner-cont" ondragover="dragOver(event)" ondrop="drop(event)" aria-label="Contract drag area">
+        <div class="no-items" aria-hidden="true">There are no elements in this contract</div>
       </div>
-      <div class="tally inner-cont" id="payment-bar">
-        <div class="contract-header">Player Compensation</div>
+      <div class="tally inner-cont" id="payment-bar" aria-label="Row containing the calculated values for player compensation">
+        <div class="contract-header" aria-hidden="true">Player Compensation</div>
         <div class="contract-element-output" style="display:block">0</div>
         <div class="contract-element-output" style="display:block">0</div>
         <div class="contract-element-output" style="display:block">0</div>
@@ -289,8 +293,8 @@
         <div class="contract-element-output" style="display:block">0</div>
         <div class="contract-element-output" style="display:block">0</div>
       </div>
-      <div class="tally inner-cont" id="cap-hit-bar">
-        <div class="contract-header">Player Cap Hits</div>
+      <div class="tally inner-cont" id="cap-hit-bar" aria-label="Row containing the calculated values for player cap hit">
+        <div class="contract-header" aria-hidden="true">Player Cap Hits</div>
         <div class="contract-element-output" style="display:block">0</div>
         <div class="contract-element-output" style="display:block">0</div>
         <div class="contract-element-output" style="display:block">0</div>
@@ -303,9 +307,9 @@
     <div class="outer-cont" id="elements-cont">
       <div class="contract-header" id="google-translate-detector">Contract Elements</div>
       <div class="contract-divider"></div>
-      <div id="element-list" class="inner-cont">
+      <div id="element-list" class="inner-cont" aria-label="A table containing various contract elements. Some may be locked and therefore cannot be used.">
 
-        <div class="contract-element base-salary locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element base-salary locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Base Salary contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -315,14 +319,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M15,10.5C15,11.3 14.3,12 13.5,12C14.3,12 15,12.7 15,13.5V15A2,2 0 0,1 13,17H9V7H13A2,2 0 0,1 15,9V10.5M13,15V13H11V15H13M13,11V9H11V11H13M3,5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Base Salary</div>
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <div class="contract-element-name" aria-hidden="true">Base Salary</div>
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 1">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 2">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 3">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 4">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 5">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 6">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Base salary year 7">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -340,7 +344,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element gtd-salary locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element gtd-salary locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Guaranteed Salary contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -350,14 +354,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M11,7H15V9H11V15H13V11H15V15A2,2 0 0,1 13,17H11A2,2 0 0,1 9,15V9A2,2 0 0,1 11,7M3,5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Guaranteed Salary</div>
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <div class="contract-element-name" aria-hidden="true">Guaranteed Salary</div>
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 1">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 2">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 3">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 4">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 5">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 6">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Guaranteed salary year 7">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -375,7 +379,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element signing-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element signing-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Signing Bonus contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -385,14 +389,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M11,7H15V9H11V11H13A2,2 0 0,1 15,13V15A2,2 0 0,1 13,17H9V15H13V13H11A2,2 0 0,1 9,11V9A2,2 0 0,1 11,7M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Signing Bonus</div>
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <div class="contract-element-name" aria-hidden="true">Signing Bonus</div>
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 1">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 2">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 3">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 4">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 5">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 6">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Signing bonus year 7">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -410,7 +414,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element option-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element option-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Option Bonus contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -420,14 +424,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5M11,7H13A2,2 0 0,1 15,9V15A2,2 0 0,1 13,17H11A2,2 0 0,1 9,15V9A2,2 0 0,1 11,7M11,9V15H13V9H11Z"/>
           </svg>
-          <div class="contract-element-name">Option Bonus</div>
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <div class="contract-element-name" aria-hidden="true">Option Bonus</div>
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 1">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 2">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 3">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 4">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 5">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 6">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Option bonus year 7">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -445,7 +449,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element workout-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element workout-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Workout Bonus contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -455,14 +459,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M9,17A2,2 0 0,1 7,15V7H9V15H11V8H13V15H15V7H17V15A2,2 0 0,1 15,17H9M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Workout Bonus</div>
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <div class="contract-element-name" aria-hidden="true">Workout Bonus</div>
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 1">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 2">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 3">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 4">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 5">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 6">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Workout bonus year 7">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -480,7 +484,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element roster-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element roster-bonus locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Roster Bonus contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -490,14 +494,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M9,7H13A2,2 0 0,1 15,9V11C15,11.84 14.5,12.55 13.76,12.85L15,17H13L11.8,13H11V17H9V7M11,9V11H13V9H11M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Roster Bonus</div>
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <div class="contract-element-name" aria-hidden="true">Roster Bonus</div>
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 1">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 2">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 3">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 4">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 5">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 6">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Roster bonus year 7">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -515,7 +519,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element incentive locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element incentive locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Incentive contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -525,8 +529,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M14,7V9H13V15H14V17H10V15H11V9H10V7H14M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Incentive</div>
-          <select class="contract-element-input" style="grid-column:span 2;">
+          <div class="contract-element-name" aria-hidden="true">Incentive</div>
+          <select class="contract-element-input" style="grid-column:span 2;" label="Choose which year incentive is assigned to">
             <option value="1">In Year 1</option>
             <option value="2">In Year 2</option>
             <option value="3">In Year 3</option>
@@ -534,15 +538,15 @@
             <option value="5">In Year 5</option>
             <option value="6">In Year 6</option>
           </select>
-          <select class="contract-element-input" style="grid-column:span 2;">
+          <select class="contract-element-input" style="grid-column:span 2;" label="Choose whether the incentive is classified as likely or unlikely">
             <option value="likely">Likely</option>
             <option value="not_likely">Not likely</option>
           </select>
-          <select class="contract-element-input" style="grid-column:span 2;">
+          <select class="contract-element-input" style="grid-column:span 2;" label="Choose whether the player achieved the incentive">
             <option value="achieved">Achieved</option>
             <option value="not_achieved">Not Achieved</option>
           </select>
-          <input type="number" value="0" min="0" class="contract-element-input">
+          <input type="number" value="0" min="0" class="contract-element-input" label="Enter the dollar amount of the incentive in millions">
           <button class="contract-element-delete contract-element-input" title="Delete Component">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
@@ -560,7 +564,7 @@
           <div class="contract-element-output">0</div>
           <div class="contract-element-output">0</div>
         </div>
-        <div class="contract-element release-or-trade locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)">
+        <div class="contract-element release-or-trade locked" title="This element is not yet unlocked" draggable="true" ondragstart="dragStart(event)" aria-label="Locked Release or Trade contract element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="locked-icon">
             <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
           </svg>
@@ -570,8 +574,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="contract-shortcut">
             <path d="M9,7H15V9H13V17H11V9H9V7M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M5,5V19H19V5H5Z"/>
           </svg>
-          <div class="contract-element-name">Release or Trade</div>
-          <select class="contract-element-input" style="grid-column:span 4;">
+          <div class="contract-element-name" aria-hidden="true">Release or Trade</div>
+          <select class="contract-element-input" style="grid-column:span 4;" label="Choose after which year the player is released">
             <option value="0">Not Traded or Released</option>
             <option value="1">After Year 1</option>
             <option value="2">After Year 2</option>
@@ -580,7 +584,7 @@
             <option value="5">After Year 5</option>
             <option value="6">After Year 6</option>
           </select>
-          <select class="contract-element-input" style="grid-column:span 3;">
+          <select class="contract-element-input" style="grid-column:span 3;" label="Choose whether the player is released before or after June 1st">
             <option value="pre">Pre-June 1st</option>
             <option value="post">Post-June 1st</option>
           </select>
@@ -595,13 +599,13 @@
     </div>
 
     <ul id="conversion-options" class="outer-cont">
-      <li value="1">Convert $1 million to signing bonus</li>
-      <li value="3">Convert $3 million to signing bonus</li>
-      <li value="5">Convert $5 million to signing bonus</li>
-      <li value="8">Convert $8 million to signing bonus</li>
-      <li value="10">Convert $10 million to signing bonus</li>
-      <li value="15">Convert $15 million to signing bonus</li>
-      <li value="20">Convert $20 million to signing bonus</li>
+      <li data-value="1">Convert $1 million to signing bonus</li>
+      <li data-value="3">Convert $3 million to signing bonus</li>
+      <li data-value="5">Convert $5 million to signing bonus</li>
+      <li data-value="8">Convert $8 million to signing bonus</li>
+      <li data-value="10">Convert $10 million to signing bonus</li>
+      <li data-value="15">Convert $15 million to signing bonus</li>
+      <li data-value="20">Convert $20 million to signing bonus</li>
       <li onclick="this.parentElement.style.display='none';">Close Menu</li>
     </ul>
 
@@ -611,5 +615,8 @@
       </svg>
     </button>
     <div id="google-translate-bar" class="outer-cont hide"></div>
+    <div id="error-cont">
+      <span class="outer-cont" role="alert"> hgiu45v hg5hg5 g87 b8745b87v 54g784 g4308 g38704 v8704 b870v b8034g64 bv64 b8034 b8703 b874 b8347bv87034b7834 b7834bv87034 v78403</span>
+    </div>
   </body>
 </html>
